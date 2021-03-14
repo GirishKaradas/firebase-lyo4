@@ -1,7 +1,8 @@
-# Tests file (Backend)
- 1. cd tests
- 2. npm install
- 3. npm run server 
+# Changes
+ 1. Changed colors of few buttons
+ 2. Changed layout of Navbar
+ 3. Added Icons to buttons for better UX
+ 4. Changed layout of Home Page
  
 
 # install (Main folder)
