@@ -60,12 +60,12 @@ export default class LineDemo extends Component {
   render() {
     return (
       <>
-      <Container maxWidth="sm" sm={12} >
-        <Radar data={data}/>
+      <Container style={{width: "70%"}} >
+        <Line data={data}/>
         <br/>
-        <Line ref="chart" data={dataTwo} />
+        <Bar ref="chart" data={dataTwo} />
       </Container>
-    
+   
       </>
     );
   }
@@ -75,6 +75,10 @@ export default class LineDemo extends Component {
     console.log(datasets[0].data);
   }
 }
+
+
+
+
 
 
 
