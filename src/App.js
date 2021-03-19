@@ -23,10 +23,14 @@ import Users from "./components/AddUser/Users";
 import { AuthProvider } from "./components/context/AuthContext";
 import ForgotPass from "./components/ForgotPass/ForgotPass";
 import ContentsData from "./Pages/ContentsData/ContentsData";
+import Page from "./components/Page";
 
 function App() {
   return (
     <AuthProvider>
+      <Page
+      title="Lyo Ims"
+      >
     <BrowserRouter>
     <Router>
       <Switch>
@@ -49,6 +53,7 @@ function App() {
       </Switch>
     </Router> 
     </BrowserRouter>
+    </Page>
     </AuthProvider>
   );
 }

@@ -28,10 +28,6 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-
-
-
-
 const AddMachines = () => {
   const { currentUser } = useAuth()
   const [title, setMachineName] = useState('')

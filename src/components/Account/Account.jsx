@@ -25,10 +25,10 @@ const Account = () => {
   const [accountTwo, setAccountTwo] = useState([{}])
   const classes = useStyles();
   const {currentUser} = useAuth()
+
   useEffect(() => {
     db.collection('users').where('email', '==', currentUser.email ).get().then(snapshot => {
       const accountData = firebaseLooper(snapshot)
-      console.log(accountData[0])
       setAccount(accountData[0])
       setAccountTwo(accountData[0])
     })
@@ -58,7 +58,7 @@ const Account = () => {
             md={6}
             xs={12}
           >
-            <ProfileDetails account={accountTwo} />
+            <ProfileDetails accountb={account} />
           </Grid>
         </Grid>
       </Container>

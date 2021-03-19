@@ -7,6 +7,7 @@ import { firebaseLooper } from '../../utils/tools';
 import Sidebar from '../../components/Sidebar/Sidebar';
 import AddIcon from '@material-ui/icons/Add';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
+import Page from '../../components/Page';
 const useStyles = makeStyles((theme) =>( {
     add: {
      
@@ -48,7 +49,7 @@ const Steps = ({match}) => {
    
 
     return (
-        <div>
+        <Page title="Steps">
            <Button startIcon={<ArrowBackIcon/>} onClick={handleReturn} variant="contained" className={classes.backButton} >Go back</Button>
              <Button
              startIcon={<AddIcon/>} 
@@ -63,7 +64,7 @@ const Steps = ({match}) => {
                     <StepItem key={data.id} data={data} />
                 ))
             }
-        </div>
+        </Page>
     )
 }
 

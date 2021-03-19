@@ -32,7 +32,7 @@ const useStyles = makeStyles(() => ({
 
 const Profile = ({account, className, ...rest }) => {
   const classes = useStyles();
-   
+  
   return (
     <Card
       className={clsx(classes.root, className)}

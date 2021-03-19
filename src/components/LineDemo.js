@@ -79,7 +79,3 @@ export default class LineDemo extends Component {
 
 
 
-
-
-
-

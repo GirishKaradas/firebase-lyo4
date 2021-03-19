@@ -34,14 +34,13 @@ const useStyles = makeStyles(() => ({
   root: {}
 }));
 
-const ProfileDetails = ({ account,className, ...rest }) => {
+const ProfileDetails = ({ accountb , className }) => {
+  
   const classes = useStyles();
   const {currentUser} = useAuth()
   const [values, setValues] = useState({ });
-  const [firstName, setFirstName] = useState(account.firstName)
-  const [lastName, setLastName] = useState(account.lastName)
-  const [phone, setPhone] = useState(account.phone)
-  const [password, setPassword] = useState(account.password)
+  const [firstName, setFirstName] = useState(accountb.firstName)
+  const [lastName, setLastName] = useState(accountb.lastName)
   return (
     <form
       
@@ -63,13 +62,13 @@ const ProfileDetails = ({ account,className, ...rest }) => {
               xs={12}
             >
               <TextField
-              value={firstName}
+              defaultValue={firstName}
                 fullWidth
                 helperText="Please specify the first name"
                 label="First name"
                 variant="outlined"
                 required
-              />
+                />
             </Grid>
             <Grid
               item
@@ -77,10 +76,10 @@ const ProfileDetails = ({ account,className, ...rest }) => {
               xs={12}
             >
               <TextField
-               value={lastName}
                 fullWidth
                 label="Last name"
                 required
+                value={lastName}
                 variant="outlined"
               />
             </Grid>
@@ -110,7 +109,7 @@ const ProfileDetails = ({ account,className, ...rest }) => {
                 name="phone"
                 
                 type="number"
-                value={phone}
+                value={accountb.phone}
                 variant="outlined"
               />
             </Grid>
@@ -125,7 +124,7 @@ const ProfileDetails = ({ account,className, ...rest }) => {
                 name="country"
                disabled
                 required
-                value={password}
+                value={accountb.password}
                 variant="outlined"
               />
             </Grid>

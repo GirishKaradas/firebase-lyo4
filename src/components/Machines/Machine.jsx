@@ -20,6 +20,7 @@ import {
   DialogContent,
   DialogActions,
   TextField,
+  Container,
   
 } from '@material-ui/core';
 import SupervisorAccountIcon from '@material-ui/icons/SupervisorAccount';
@@ -32,6 +33,7 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     flexDirection: 'column',
     height: "100%",
+   
     backgroundColor: theme.palette.background.dark,
     marginLeft: "50px",
     marginBottom: "50px"
@@ -102,10 +104,11 @@ const Machine= ({data}) => {
 
    
   return (
-      <div className={classes.root}>
+      <Container className={classes.root}>
       
-       <div >
-        <Box  mt={3}>  
+       < >
+
+        <Box mt={3}>  
             <Grid  >
                
             <Card
@@ -274,8 +277,8 @@ const Machine= ({data}) => {
             </Grid>  
          </Box>
          
-            </div>
-    </div>
+            </>
+    </Container>
   );
 };
  

@@ -1,4 +1,4 @@
-import { Button, Container, makeStyles, Typography } from '@material-ui/core';
+import { Button, Container, Grid, makeStyles, Typography } from '@material-ui/core';
 import React, { useEffect, useState } from 'react'
 import MachineList from './MachineList';
 import {Link} from 'react-router-dom';
@@ -7,6 +7,7 @@ import {db} from '../../firebase';
 import {firebaseLooper} from '../../utils/tools'
 import AddIcon from '@material-ui/icons/Add';
 import HomeIcon from '@material-ui/icons/Home';
+import Page from '../Page';
 const useStyles = makeStyles((theme) =>( {
     add: {
     background:'#141256',
@@ -47,26 +48,33 @@ const Machines = () => {
 
    
     return (
+        <Page title="Machines">
         <Container maxWidth>
-            <Button startIcon={<HomeIcon/>} href="/" className={classes.backButton}>Home</Button>
-        {error && <Typography variant="h6">{error}</Typography>}
-        {isLoading && <Typography variant="h3">Loading...</Typography>}
-           <Button
-           startIcon={<AddIcon/>} 
-            variant="contained"
-            color="primary" className={classes.add}>
-               <Link style={{color: "white" ,textDecoration: "none"}} to="/add-machine">
-                    Add Machine
-               </Link>
-               </Button>
-               {
-                   machines.map((data) => (
-                        <Machine key={data.id} data={data}/>
-                   ))
-         
-         }
-        
-        </Container>
+                    <Button startIcon={<HomeIcon/>} href="/" className={classes.backButton}>Home</Button>
+                {error && <Typography variant="h6">{error}</Typography>}
+                {isLoading && <Typography variant="h3">Loading...</Typography>}
+                <Button
+                startIcon={<AddIcon/>} 
+                    variant="contained"
+                    color="primary" className={classes.add}>
+                    <Link style={{color: "white" ,textDecoration: "none"}} to="/add-machine">
+                            Add Machine
+                    </Link>
+                    </Button>
+                    
+                            {
+                        machines.map((data) => (
+                                    <Machine style={{height: "100%"}} key={data.id} data={data}/> 
+                        ))
+                
+                }
+                    
+                    
+                
+                </Container>
+
+        </Page>
+       
     )
 }
 

@@ -5,7 +5,7 @@ import {useDropzone} from 'react-dropzone';
 import {db, storageRef} from '../../firebase'
 import { DropzoneArea } from 'material-ui-dropzone';
 import Alert from '@material-ui/lab/Alert';
-
+import { v4 as uuid } from 'uuid'
 const useStyles = makeStyles((theme) => ({
   paper: {
     marginTop: theme.spacing(8),
@@ -53,6 +53,7 @@ const AddSteps = ({match}) => {
   const [title, setTitle] = useState('')
   const [desc, setDesc] = useState('');
   const [createdAt, setCreatedAt] = useState('');
+   const [uniqueKey, setUniqueKey] = useState(uuid());
   const [cid, setCid] = useState(match.params.id)
   const [media, setMedia] = useState({
     mediaData: null ,
@@ -70,14 +71,14 @@ const AddSteps = ({match}) => {
     e.preventDefault();
     console.log(media)
      storageRef
-     .child(`/media/steps/${title}/${media.mediaData[0].name}`)
+     .child(`/media/steps/${uniqueKey}/${media.mediaData[0].name}`)
      .put(media.mediaData[0]).snapshot.ref.getDownloadURL().then((durl) => {
        setMedia({url: durl})
        console.log(durl)
      })
-    
+   
     const link = media.mediaData[0].name
-    const steps = {title, desc, createdAt, cid, link };
+    const steps = {title, desc, createdAt, cid, link, uniqueKey };
     setLoading(true);
     db.collection('steps').add(steps).then(()=>{
       setLoading(false)
@@ -139,11 +140,11 @@ const AddSteps = ({match}) => {
             
           />
            <TextField
-           value={createdAt}
+           value={uniqueKey}
            variant="outlined"
             id="date"
-            label="Created At"
-            type="date"
+            label="unique id"
+            disabled
             fullWidth
             InputLabelProps={{
               shrink: true,

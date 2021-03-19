@@ -9,6 +9,7 @@ import { firebaseLooper } from '../../utils/tools';
 import ContentDataBox from './ContentDataBox';
 import AddIcon from '@material-ui/icons/Add';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
+import Page from '../../components/Page';
 const useStyles = makeStyles((theme) =>( {
     add: {
      
@@ -44,7 +45,9 @@ const ContentsData = ({match}) => {
        history.push('/machine-data')
    }
     return (
-        <div>
+        <Page
+        title="Content"
+        >
 
             <Sidebar match={match}/>
             <Button startIcon={<ArrowBackIcon/>} onClick={handleReturn} variant="contained" className={classes.backButton}>Go back</Button>
@@ -62,7 +65,7 @@ const ContentsData = ({match}) => {
                 <ContentDataBox key={data.id} data={data}/>
             ))}
             
-        </div>
+        </Page>
     )
 }
 

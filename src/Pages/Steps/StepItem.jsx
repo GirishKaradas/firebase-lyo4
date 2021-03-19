@@ -46,7 +46,7 @@ export default function StepItem({ data}) {
     const [createdAt, setCreatedAt] = useState(data.createdAt)
     const [loading, setLoading] = useState(false);
     const history = useHistory()
-    const mediaRef = storageRef.child(`/media/steps/${data.title}/${data.link}`)
+    const mediaRef = storageRef.child(`/media/steps/${data.uniqueKey}/${data.link}`)
   
     const handleView = () => {
       setOpenView(true)
@@ -161,7 +161,7 @@ const updateStep=(id) => {
                    </Alert>
                     <form className={classes.form}  >
                         <TextField
-                        disabled
+                       
                         defaultValue={title}                       
                           variant="outlined"
                           margin="normal"
@@ -191,18 +191,6 @@ const updateStep=(id) => {
                           required
                           fullWidth                         
                           disabled
-                        />
-                        <TextField
-                        defaultValue={createdAt}
-                        fullWidth
-                        variant="outlined"
-                          id="date"
-                          label="Created At"
-                          type="date"
-                          InputLabelProps={{
-                            shrink: true,
-                          }}
-                          onChange={(e) => setCreatedAt(e.target.value)}
                         />
                     <DialogActions>
                       <Button color="secondary" onClick={handleEditClose}>Cancel</Button>
@@ -263,20 +251,9 @@ const updateStep=(id) => {
                           id="desc"
                           multiline
                         />
-                        <TextField
-                        defaultValue={createdAt}
-                        disabled
-                        fullWidth
-                          id="date"
-                          label="Created At"
-                          type="date"
-                          InputLabelProps={{
-                            shrink: true,
-                          }}
-                         gutterBottom
-                        />
                         
-                        <img height="300" width="400" src={link} alt="no data"/>
+                        
+                        <img height="400" width="500" src={link} alt="no data"/>
                       
                      
                     <DialogActions>
