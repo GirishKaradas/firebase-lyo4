@@ -1,3 +1,10 @@
+# Changes till 23/3/2021
+ 1. Call logs data from Glass
+ 2. Batch logs data from Glass
+ 3. Graph data incomplete 
+ 4. Account data in progress
+ 5. Video Call Pending
+
 # Changes 18/3/2021
  1. Steps uuid added for media
  2. Page helmet added
