@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
 import {
@@ -14,6 +14,7 @@ import {
 } from '@material-ui/core';
 import { db } from '../../firebase';
 import { useAuth } from '../context/AuthContext';
+import { firebaseLooper } from '../../utils/tools';
 
 const states = [
   {
@@ -39,8 +40,19 @@ const ProfileDetails = ({ accountb , className }) => {
   const classes = useStyles();
   const {currentUser} = useAuth()
   const [values, setValues] = useState({ });
-  const [firstName, setFirstName] = useState(accountb.firstName)
+ 
   const [lastName, setLastName] = useState(accountb.lastName)
+  const [account, setAccount] = useState([])
+
+  useEffect(() => {
+    db.collection('users').where('email', '==', currentUser.email ).get().then(snapshot => {
+      const accountData = firebaseLooper(snapshot)
+      setAccount(accountData[0])
+      
+    })
+  })
+   const [firstName, setFirstName] = useState(account.firstName)
+
   return (
     <form
      
@@ -62,10 +74,10 @@ const ProfileDetails = ({ accountb , className }) => {
               xs={12}
             >
               <TextField
-              defaultValue={firstName}
+              label="First name"
+              value={firstName}
                 fullWidth
                 helperText="Please specify the first name"
-                label="First name"
                 variant="outlined"
                 required
                 />
@@ -107,7 +119,6 @@ const ProfileDetails = ({ accountb , className }) => {
                 fullWidth
                 label="Phone Number"
                 name="phone"
-                
                 type="number"
                 value={accountb.phone}
                 variant="outlined"
@@ -121,10 +132,10 @@ const ProfileDetails = ({ accountb , className }) => {
               <TextField
                 fullWidth
                 label="Password"
-                name="country"
+                
                disabled
                 required
-                value={accountb.password}
+                value={currentUser.password}
                 variant="outlined"
               />
             </Grid>

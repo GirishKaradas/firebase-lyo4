@@ -25,6 +25,7 @@ import ForgotPass from "./components/ForgotPass/ForgotPass";
 import ContentsData from "./Pages/ContentsData/ContentsData";
 import Page from "./components/Page";
 import Tests from "./Pages/Tests/Tests";
+import AccountDetails from "./components/Account/AccountDetails";
 
 function App() {
   return (
@@ -46,7 +47,7 @@ function App() {
         <Route path="/login" exact component={LogIn} />
         <Route path="/forgotPass" exact component={ForgotPass}/>
         <AppRoute path="/users/add-user" exact component={AddUser} layout={MainLayout}/>
-        <AppRoute path="/account" exact component={Account} layout={MainLayout}/> 
+        <AppRoute path="/account" exact component={AccountDetails} layout={MainLayout}/> 
         <AppRoute path="/machine-data/:id/:id/:id/steps" exact component={Steps} layout={MainLayout}/>
         <AppRoute path="/steps/:id/add-step" exact component={AddSteps} layout={MainLayout}/>
         <AppRoute path="/" exact component={MiddlePage} layout={MainLayout}/>

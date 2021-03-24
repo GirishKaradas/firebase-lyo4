@@ -11,7 +11,8 @@ import {
   CardContent,
   Divider,
   Typography,
-  makeStyles
+  makeStyles,
+  TextField
 } from '@material-ui/core';
 
 const user = {
@@ -79,6 +80,9 @@ const Profile = ({account, className, ...rest }) => {
         >
           Upload picture
         </Button>
+      </CardActions>
+      <Divider />
+      <CardActions>
       </CardActions>
     </Card>
   );

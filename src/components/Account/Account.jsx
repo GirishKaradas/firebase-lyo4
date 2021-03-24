@@ -1,16 +1,22 @@
 import React, { useEffect, useState } from 'react';
-import {
-  Container,
-  Grid,
-  makeStyles
-} from '@material-ui/core';
 import Page from '../Page';
 import Profile from './Profile';
 import ProfileDetails from './ProfileDetails';
 import { db } from '../../firebase';
 import { useAuth } from '../context/AuthContext';
 import { firebaseLooper } from '../../utils/tools';
-
+import {
+  Box,
+  Container,
+  Button,
+  Card,
+  CardContent,
+  CardHeader,
+  Divider,
+  Grid,
+  TextField,
+  makeStyles
+} from '@material-ui/core';
 const useStyles = makeStyles((theme) => ({
   root: {
     backgroundColor: theme.palette.background.dark,

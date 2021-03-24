@@ -1,5 +1,3 @@
-
-import Chart from "react-apexcharts";
 import React, { useEffect, useState } from 'react'
 import { Line } from "react-chartjs-2";
 
@@ -8,10 +6,14 @@ const TestHome = ({time1, data}) => {
   let temp = []
   let stillTime = []
   let pressure = []
+  let delta =  []
+  let deltaP =[]
   const [timeData, setTimeData] = useState([])
   const [stillTimeData, setStillTimeData] = useState([])
   const [tempData, setTempData] = useState([])
   const [pressureData, setPressureData] = useState([])
+  const [deltaData, setDeltaData] = useState([])
+  const [deltaDataPressure, setDeltaDataPressure] = useState([])
 
   useEffect(() => {
     for (let index = 0; index < data.length; index++) {
@@ -19,36 +21,17 @@ const TestHome = ({time1, data}) => {
       temp.push(data[index].temp1)
       stillTime.push(data[index].time2)
       pressure.push(data[index].pressure)
+      delta.push(((data[index].temp1 - 25)/(data[index].time1)) + data[index].temp1)
+      deltaP.push(Math.floor(Math.random() * ((data[index].temp1 - 25)/(data[index].temp1) + data[index].pressure)))
     }
   setTimeData(time)
   setTempData(temp)
   setStillTimeData(stillTime)
   setPressureData(pressure)
+  setDeltaData(delta)
+  setDeltaDataPressure(deltaP)
   })
   console.log(timeData)
-const options = {
-  chart: {
-    id: "basic-line"
-  },
-  xaxis: {
-    categories: timeData
-  },
-  markers: {
-    size: 0,
-},
-  
-}
-
-const series = [
-     { 
-          name: "Temprature",
-          data: tempData
-     },
- { 
-          name: "Pressure",
-          data: pressureData
-     },
-]
 
 const dataTwo = {
   labels: timeData,
@@ -73,6 +56,27 @@ const dataTwo = {
       pointRadius: 1,
       pointHitRadius: 10,
       data: tempData
+    },
+    {
+      label: 'Dynamic-Temprature',
+      fill: false,
+      lineTension: 0.1,
+      backgroundColor: '#7eca9c',
+      borderColor: '#7eca9c',
+      borderCapStyle: 'butt',
+      borderDash: [],
+      borderDashOffset: 0.0,
+      borderJoinStyle: 'miter',
+      pointBorderColor: '#93329e',
+      pointBackgroundColor: '#93329e',
+      pointBorderWidth: 1,
+      pointHoverRadius: 5,
+      pointHoverBackgroundColor: '#93329e',
+      pointHoverBorderColor: '#93329e',
+      pointHoverBorderWidth: 2,
+      pointRadius: 1,
+      pointHitRadius: 10,
+      data: deltaData
     }
   ]
 };
@@ -106,7 +110,7 @@ const dataOne = {
 
     return (
         <div>
-        <Line  data={dataTwo}/>
+        <Line data={dataTwo}/>
         <Line data={dataOne}/>
         </div>
     )
