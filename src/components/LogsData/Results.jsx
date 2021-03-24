@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
 import moment from 'moment';
@@ -18,6 +18,8 @@ import {
   makeStyles
 } from '@material-ui/core';
 import getInitials from './getInitials';
+import { database } from '../../firebaseGlass';
+import { firebaseLooperTwo } from '../../utils/tools';
 
 const useStyles = makeStyles((theme) => ({
   root: {},
@@ -30,7 +32,18 @@ const Results = ({ className, customers, ...rest }) => {
   const classes = useStyles();
   const [selectedCustomerIds, setSelectedCustomerIds] = useState([]);
   const [limit, setLimit] = useState(10);
-  const [page, setPage] = useState(0);
+  const [page, setPage] = useState(0)
+
+   const [calls, setCalls] = useState([]);
+
+  useEffect(() => {
+        database.ref('calls/').get().then((snapshot) => {
+            const data = firebaseLooperTwo(snapshot)
+            console.log(data)
+            setCalls(data)
+           
+        })
+      })
 
   const handleSelectAll = (event) => {
     let newSelectedCustomerIds;
@@ -93,68 +106,55 @@ const Results = ({ className, customers, ...rest }) => {
                     onChange={handleSelectAll}
                   />
                 </TableCell>
-                <TableCell>
-                  From 
+                <TableCell align="center">
+                  <strong>Manual</strong>
                 </TableCell>
-                <TableCell>
-                  To
+                <TableCell align="center">
+                  <strong>Step</strong> 
                 </TableCell>
-                <TableCell>
-                  Phone
+                <TableCell align="center">
+                   <strong>Time</strong>
                 </TableCell>
-                <TableCell>
-                  Date
-                </TableCell>
+               
               </TableRow>
             </TableHead>
             <TableBody>
-              {customers.slice(0, limit).map((customer) => (
+              {calls.slice(0, limit).map((customer) => (
                 <TableRow
                   hover
                   key={customer.id}
-                  selected={selectedCustomerIds.indexOf(customer.id) !== -1}
+                  selected={selectedCustomerIds.indexOf(customer.key) !== -1}
                 >
-                  <TableCell padding="checkbox">
+                  <TableCell  padding="checkbox" align="center">
                     <Checkbox
-                      checked={selectedCustomerIds.indexOf(customer.id) !== -1}
-                      onChange={(event) => handleSelectOne(event, customer.id)}
+                      checked={selectedCustomerIds.indexOf(customer.key) !== -1}
+                      onChange={(event) => handleSelectOne(event, customer.key)}
                       value="true"
                     />
                   </TableCell>
-                  <TableCell>
-                    <Box
-                      alignItems="center"
-                      display="flex"
-                    >
-                      <Avatar
-                        className={classes.avatar}
-                        src={customer.avatarUrl}
-                      >
-                        {getInitials(customer.name)}
-                      </Avatar>
+                  <TableCell align="center"> 
                       <Typography
+                      align="center"
                         color="textPrimary"
-                        variant="body1"
+                        variant="button"
                       >
-                        {customer.name}
+                        {customer.manual}
                       </Typography>
-                    </Box>
+                   
                   </TableCell>
-                  <TableCell>
+                  <TableCell align="center">
 
                   <Typography
                         color="textPrimary"
-                        variant="body1"
+                        variant="button"
                       >
-                        {customer.email}
+                        {customer.step}
                       </Typography>
                   </TableCell>
-                  <TableCell>
-                    {customer.phone}
+                  <TableCell align="center">
+                    {customer.time}
                   </TableCell>
-                  <TableCell>
-                    {moment(customer.createdAt).format('DD/MM/YYYY')}
-                  </TableCell>
+                  
                 </TableRow>
               ))}
             </TableBody>

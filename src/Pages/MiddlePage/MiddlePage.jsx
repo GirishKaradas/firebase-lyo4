@@ -8,7 +8,9 @@ import PowerSettingsNewIcon from '@material-ui/icons/PowerSettingsNew';
 import PersonIcon from '@material-ui/icons/Person';
 import GroupIcon from '@material-ui/icons/Group';
 import BuildIcon from '@material-ui/icons/Build';
+import PhoneCallbackIcon from '@material-ui/icons/PhoneCallback';
 import { AlertTitle } from '@material-ui/lab'
+import Machines from '../../components/Machines/Machines'
 const MiddlePage = () => {
 
     const [error, setError] = useState("")
@@ -52,6 +54,7 @@ const MiddlePage = () => {
              <Button startIcon={<BuildIcon/>} style={{backgroundColor: "blue",width:"150px", marginRight: "30px"}} color="primary" variant="contained" href="/machine-data"> Machines</Button>
             <Button startIcon={<PersonIcon/>} style={{backgroundColor: "blue",width:"150px",marginRight: "30px"}} color="primary" variant="contained" href="/account"> Account</Button>
             <Button startIcon={<GroupIcon/>} style={{backgroundColor: "blue",width:"150px",marginRight: "30px"}} color="primary" variant="contained" href="/users"> Users</Button>
+             <Button startIcon={<PhoneCallbackIcon/>} style={{backgroundColor: "blue",width:"150px",marginRight: "30px"}} color="primary" variant="contained" href="/call-logs"> Call Logs</Button>
             {error && <Alert severity="error">{error}</Alert>}
             <br/>
             <br/>

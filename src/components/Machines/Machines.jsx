@@ -1,4 +1,4 @@
-import { Button, Container, Grid, makeStyles, Typography } from '@material-ui/core';
+import { Button, CircularProgress, Container, Grid, makeStyles, Typography } from '@material-ui/core';
 import React, { useEffect, useState } from 'react'
 import MachineList from './MachineList';
 import {Link} from 'react-router-dom';
@@ -52,7 +52,7 @@ const Machines = () => {
         <Container maxWidth>
                     <Button startIcon={<HomeIcon/>} href="/" className={classes.backButton}>Home</Button>
                 {error && <Typography variant="h6">{error}</Typography>}
-                {isLoading && <Typography variant="h3">Loading...</Typography>}
+               
                 <Button
                 startIcon={<AddIcon/>} 
                     variant="contained"
@@ -61,7 +61,9 @@ const Machines = () => {
                             Add Machine
                     </Link>
                     </Button>
-                    
+                     {isLoading && <Typography variant="h3">
+                    Loading...<CircularProgress size={50}/> 
+                    </Typography>}
                             {
                         machines.map((data) => (
                                     <Machine style={{height: "100%"}} key={data.id} data={data}/> 

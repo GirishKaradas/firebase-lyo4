@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import {
   Box,
+  Button,
   Container,
   makeStyles
 } from '@material-ui/core';
@@ -9,6 +10,7 @@ import Results from './Results';
 import Toolbar from './Toolbar';
 import data from './data';
 import Sidebar from '../Sidebar/Sidebar';
+import HomeIcon from '@material-ui/icons/Home';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -16,7 +18,17 @@ const useStyles = makeStyles((theme) => ({
     minHeight: '100%',
     paddingBottom: theme.spacing(3),
     paddingTop: theme.spacing(3)
-  }
+  },
+  backButton: {
+        backgroundColor: "#A997DF",
+        width: "100px",
+        color: "white",
+        borderRadius: "20px",
+        marginRight: "30px",
+        marginLeft: "20px",
+        marginTop: "30px"
+    },
+
 }));
 
 const CustomerListView = ({match}) => {
@@ -26,7 +38,7 @@ const CustomerListView = ({match}) => {
 
   return (
     <>
-    <Sidebar match={match}/>
+  <Button startIcon={<HomeIcon/>} href="/" className={classes.backButton}>Home</Button>
     <Page
       className={classes.root}
       title="Call Logs"

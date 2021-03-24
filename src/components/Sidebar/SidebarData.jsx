@@ -18,11 +18,6 @@ export const SidebarData = [
        
     },
     {
-        title: 'Call-Logs',
-        path: '/machine-data/Reports',
-        icon: <PhoneCallbackIcon style={{color: "white"}}/>
-    },
-    {
         title: 'Batch-Logs',
         path: '/machine-data/Reports',
         icon: <BuildIcon style={{color: "white"}}/>

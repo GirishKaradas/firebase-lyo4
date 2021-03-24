@@ -8,3 +8,14 @@ export const firebaseLooper = (snapshot) => {
     })
     return data
 }
+
+export const firebaseLooperTwo = (snapshot) => {
+    let data = [];
+    snapshot.forEach( doc => {
+        data.push({
+            ...doc.val()
+           
+        })
+    })
+    return data
+}

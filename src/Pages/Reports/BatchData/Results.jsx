@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
 import moment from 'moment';
@@ -15,9 +15,19 @@ import {
   TablePagination,
   TableRow,
   Typography,
-  makeStyles
+  makeStyles,
+  Button,
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  DialogActions,
+  Container
 } from '@material-ui/core';
 import getInitials from './getInitials';
+import { database } from '../../../firebaseGlass';
+import { firebaseLooperTwo } from '../../../utils/tools';
+import { Alert, AlertTitle } from '@material-ui/lab';
+import TestHome from '../../Tests/TestHome';
 
 const useStyles = makeStyles((theme) => ({
   root: {},
@@ -26,99 +36,134 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-const Results = ({ className, customers, ...rest }) => {
+const Results = ({values, className, customers, ...rest }) => {
+
+
   const classes = useStyles();
   const [selectedCustomerIds, setSelectedCustomerIds] = useState([]);
   const [limit, setLimit] = useState(10);
   const [page, setPage] = useState(0);
+  const [open, setOpen] = useState(false)
+  const [openGraph, setOpenGraph] = useState(false)
+  const [batch, setBatch] = useState([]);
+   
+    useEffect(() => {
+        database.ref('recipes/').get().then((snapshot) => {
+            const data = firebaseLooperTwo(snapshot)
+            console.log(data)
+            setBatch(data)
+           
+        })
+      })
 
-  const handleSelectAll = (event) => {
-    let newSelectedCustomerIds;
+    const handleClickOpen = () => {
+        setOpen(true);
+      };
 
-    if (event.target.checked) {
-      newSelectedCustomerIds = customers.map((customer) => customer.id);
-    } else {
-      newSelectedCustomerIds = [];
+      const handleClose = () => {
+    setOpen(false);
+  };
+
+  const handleGraphOpen = () => {
+      setOpenGraph(true)
     }
-
-    setSelectedCustomerIds(newSelectedCustomerIds);
-  };
-
-  const handleSelectOne = (event, id) => {
-    const selectedIndex = selectedCustomerIds.indexOf(id);
-    let newSelectedCustomerIds = [];
-
-    if (selectedIndex === -1) {
-      newSelectedCustomerIds = newSelectedCustomerIds.concat(selectedCustomerIds, id);
-    } else if (selectedIndex === 0) {
-      newSelectedCustomerIds = newSelectedCustomerIds.concat(selectedCustomerIds.slice(1));
-    } else if (selectedIndex === selectedCustomerIds.length - 1) {
-      newSelectedCustomerIds = newSelectedCustomerIds.concat(selectedCustomerIds.slice(0, -1));
-    } else if (selectedIndex > 0) {
-      newSelectedCustomerIds = newSelectedCustomerIds.concat(
-        selectedCustomerIds.slice(0, selectedIndex),
-        selectedCustomerIds.slice(selectedIndex + 1)
-      );
+  const handleGraphClose = () => {
+      setOpenGraph(false)
     }
-
-    setSelectedCustomerIds(newSelectedCustomerIds);
-  };
-
-  const handleLimitChange = (event) => {
-    setLimit(event.target.value);
-  };
-
-  const handlePageChange = (event, newPage) => {
-    setPage(newPage);
-  };
-
+  
   return (
     <Card
       className={clsx(classes.root, className)}
       {...rest}
     >
       <PerfectScrollbar>
-        <Box minWidth={1050}>
-          <Table>
-            <TableHead>
-              <TableRow>
-                <TableCell padding="checkbox">
-                  <Checkbox
-                    checked={selectedCustomerIds.length === customers.length}
+        <Table >
+        
+           
+         <TableRow
+                  hover
+                  key={values.key}
+                  
+                >
+                   <TableCell padding="checkbox">
+                    <Checkbox
+                    defaultChecked
                     color="primary"
-                    indeterminate={
-                      selectedCustomerIds.length > 0
-                      && selectedCustomerIds.length < customers.length
-                    }
-                    onChange={handleSelectAll}
-                  />
-                </TableCell>
-                <TableCell>
-                    ID
-                </TableCell>
-                <TableCell>
-                  Recipee Name
-                </TableCell>
-                <TableCell>
-                  Operator
-                </TableCell>
-                <TableCell>
-                  Time Started
-                </TableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {customers.slice(0, limit).map((customer) => (
+                    disabled
+                    />
+                    </TableCell>
+                  <TableCell align="left">
+                    <Box
+                      alignItems="center"
+                      display="flex"
+                    >
+                      <Typography
+                        color="textPrimary"
+                        variant="h4"
+                        
+                      >
+                       {values.title} 
+                      </Typography>
+                    </Box>
+                  </TableCell>
+                 
+                  <TableCell align="right">
+                    <Button onClick={handleClickOpen} style={{color: "white", backgroundColor: "blue", borderRadius: "15px", marginRight: "20px"}}>Show Data</Button>
+                    <Button onClick={handleGraphOpen}  style={{color: "white", backgroundColor: "rebeccapurple", borderRadius: "15px"}}>Show Graph</Button>
+                    </TableCell>
+                  
+                  
+                  
+                  {/* Dialog box data */}
+                  
+                  <Dialog
+                    open={open}
+                    onClose={handleClose}
+                    aria-labelledby="alert-dialog-title"
+                    aria-describedby="alert-dialog-description"
+                >
+                    <DialogTitle id="alert-dialog-title">{`Details for ${values.title}`}</DialogTitle>
+                    <DialogContent>
+                   <Alert severity="info" variant="standard">
+                      <AlertTitle>
+                        Batch Details
+                      </AlertTitle>
+      
+                   </Alert>
+                    <form  >
+                        <Table>
+                          <TableHead>
+                        <TableRow>
+                          <TableCell align="center">
+                              <strong>CB </strong>
+                          </TableCell>
+                          <TableCell align="center">
+                              <strong>Step </strong>
+                          </TableCell>
+                          <TableCell align="center">
+                          <strong>Temp</strong> 
+                          </TableCell>
+                          
+                          <TableCell align="center">
+                            <strong>Time</strong> 
+                          </TableCell>
+                          <TableCell align="center">
+                            <strong>Keep Time</strong> 
+                          </TableCell>
+                          <TableCell align="center">
+                            <strong>Pressure</strong> 
+                          </TableCell>
+                        </TableRow>
+                      </TableHead>
+
+                      <TableBody>
+              {values.arrayList.map((data) => (
                 <TableRow
                   hover
-                  key={customer.id}
-                  selected={selectedCustomerIds.indexOf(customer.id) !== -1}
                 >
                   <TableCell padding="checkbox">
                     <Checkbox
-                      checked={selectedCustomerIds.indexOf(customer.id) !== -1}
-                      onChange={(event) => handleSelectOne(event, customer.id)}
-                      value="true"
+                    defaultChecked
                     />
                   </TableCell>
                   <TableCell>
@@ -126,17 +171,11 @@ const Results = ({ className, customers, ...rest }) => {
                       alignItems="center"
                       display="flex"
                     >
-                      <Avatar
-                        className={classes.avatar}
-                        src={customer.avatarUrl}
-                      >
-                        {getInitials(customer.name)}
-                      </Avatar>
                       <Typography
                         color="textPrimary"
                         variant="body1"
                       >
-                        {customer.id}
+                       {data.step}
                       </Typography>
                     </Box>
                   </TableCell>
@@ -146,37 +185,71 @@ const Results = ({ className, customers, ...rest }) => {
                         color="textPrimary"
                         variant="body1"
                       >
-                        {customer.name}
+                       {data.temp1}
                       </Typography>
                   </TableCell>
                   <TableCell>
-                    {customer.operator}
+                   {data.time1}
                   </TableCell>
                   <TableCell>
-                    {moment(customer.createdAt).format('DD/MM/YYYY')}
+                    {data.time2}
+                  </TableCell>
+                  <TableCell>
+                    {data.pressure}
                   </TableCell>
                 </TableRow>
               ))}
             </TableBody>
-          </Table>
-        </Box>
+                        </Table>
+                    </form>
+                    <DialogActions>
+                    <Button onClick={handleClose} color="primary" variant="outlined">
+                        Close
+                    </Button>
+                    </DialogActions>
+                    </DialogContent>
+                    
+                </Dialog>
+
+                {/* Dialog for Graph */}
+                 <Dialog
+                    open={openGraph}
+                    onClose={handleGraphClose}
+                    aria-labelledby="alert-dialog-title"
+                    aria-describedby="alert-dialog-description"
+                >
+                    <DialogTitle id="alert-dialog-title">{`Details for ${values.title}`}</DialogTitle>
+                    <DialogContent>
+                   <Alert severity="info" variant="standard">
+                      <AlertTitle>
+                        Graph for {values.title}
+                      </AlertTitle>
+      
+                   </Alert>
+                   <Box mt={3} minWidth={500}>
+                     <TestHome data={values.arrayList}/>
+                   </Box>
+                      
+                   
+                    <DialogActions>
+                    <Button onClick={handleGraphClose} color="primary" variant="outlined">
+                        Close
+                    </Button>
+                    </DialogActions>
+                    </DialogContent>
+                    
+                </Dialog>
+                </TableRow>
+            
+            </Table>
       </PerfectScrollbar>
-      <TablePagination
-        component="div"
-        count={customers.length}
-        onChangePage={handlePageChange}
-        onChangeRowsPerPage={handleLimitChange}
-        page={page}
-        rowsPerPage={limit}
-        rowsPerPageOptions={[5, 10, 25]}
-      />
+      
     </Card>
   );
 };
 
 Results.propTypes = {
   className: PropTypes.string,
-  customers: PropTypes.array.isRequired
 };
 
 export default Results

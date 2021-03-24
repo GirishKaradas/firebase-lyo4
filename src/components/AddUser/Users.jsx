@@ -1,4 +1,4 @@
-import { Button, Container, makeStyles, Typography } from '@material-ui/core';
+import { Button, CircularProgress, Container, Fade, makeStyles, Typography } from '@material-ui/core';
 import React, { useEffect, useState } from 'react'
 import UserList from './UserList';
 import {Link, useHistory} from 'react-router-dom';
@@ -46,7 +46,7 @@ const Users = () => {
             onClick={handleReturn}
             >Go back</Button>
         {error && <Typography variant="h6">{error}</Typography>}
-        {isLoading && <Typography variant="h3">Loading...</Typography>}
+       
            <Button 
            startIcon={<AddIcon/>}
             variant="contained"
@@ -55,7 +55,11 @@ const Users = () => {
                     Add user
                </Link>
                </Button>
-               <UserList users={users}/>
+               
+               <UserList users={users}/> 
+               {isLoading && 
+                    <CircularProgress  />
+                   }
           
         </Container>
     )

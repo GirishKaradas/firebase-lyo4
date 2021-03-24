@@ -44,7 +44,7 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor:"#141256",
   },
   form: {
-    width: '800px', // Fix IE 11 issue.
+    width: '700px', // Fix IE 11 issue.
     marginTop: theme.spacing(3),
   },
   submit: {
@@ -59,7 +59,8 @@ export default function AddUser() {
   const passwordRef= useRef()
   const passwordConfirmRef = useRef()
   const [firstName, setFirstName] = useState('');
-  const [lastName, setLastName] = useState('');
+  const [lastName, setLastName] = useState('')
+  const [username, setUsername] = useState('')
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('')
   const [role, setRole] = useState('')
@@ -79,7 +80,11 @@ export default function AddUser() {
     if (password !== confirmPass) {
       return setError("Passwords do not match")
     }
-    const userData = {firstName, lastName, email, password, phone, role}
+    if (password.length <= 8){
+      return setError("Weak Password !")
+    }
+
+    const userData = {firstName, lastName, email, password, phone, role, username}
     try {
       setError("")
       setLoading(true)
@@ -137,10 +142,9 @@ export default function AddUser() {
             <Grid item xs={12} sm={6}>
               <TextField
               value={lastName}
+              fullWidth
                 variant="outlined"
                 required
-                fullWidth
-               
                 id="lastName"
                 label="Last Name"
                 name="lastName"
@@ -160,6 +164,16 @@ export default function AddUser() {
                 name="email"
                 autoComplete="email"
                 onChange={(e) => setEmail(e.target.value)}
+              />
+            </Grid>
+             <Grid item xs={12}>
+              <TextField
+              value={username}
+                variant="outlined"
+                required
+                fullWidth
+                label="Username"
+                onChange={(e) => setUsername(e.target.value)}
               />
             </Grid>
             <Grid item xs={12}>
@@ -182,6 +196,7 @@ export default function AddUser() {
                 variant="outlined"
                 required
                 fullWidth
+                helperText="Password must have atleast 8 characters"
                 ref={passwordRef}
                 id="password"
                 label="Password"

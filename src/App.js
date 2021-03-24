@@ -24,6 +24,7 @@ import { AuthProvider } from "./components/context/AuthContext";
 import ForgotPass from "./components/ForgotPass/ForgotPass";
 import ContentsData from "./Pages/ContentsData/ContentsData";
 import Page from "./components/Page";
+import Tests from "./Pages/Tests/Tests";
 
 function App() {
   return (
@@ -35,7 +36,7 @@ function App() {
     <Router>
       <Switch>
         <AppRoute path='/machine-data/:id/Reports' exact component={Reports} layout={MainLayout}/>
-         <AppRoute path='/machine-data/reports/:id/Call-Logs' exact component={CustomerListView} layout={MainLayout} />
+         <AppRoute path='/call-logs' exact component={CustomerListView} layout={MainLayout} />
         <AppRoute path='/machine-data/reports/:id/Batch-Logs' exact component={BatchListView} layout={MainLayout} />
         <AppRoute path='/machine-data/reports/:id/process' exact component={Process} layout={MainLayout} />
         <AppRoute path='/machine-data/:id/Content' exact component={ContentsData} layout={MainLayout} />
@@ -50,8 +51,9 @@ function App() {
         <AppRoute path="/steps/:id/add-step" exact component={AddSteps} layout={MainLayout}/>
         <AppRoute path="/" exact component={MiddlePage} layout={MainLayout}/>
         <AppRoute path="/users" exact component={Users} layout={MainLayout}/>
+        <AppRoute path="/test" exact component={Tests} layout={MainLayout}/>
       </Switch>
-    </Router> 
+    </Router>
     </BrowserRouter>
     </Page>
     </AuthProvider>

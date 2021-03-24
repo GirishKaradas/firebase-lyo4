@@ -20,21 +20,10 @@ const BatchLogs = ({match}) => {
     const [batch, setBatch] = useState(null);
     const [error, setError] = useState(null)
     useEffect(() => {
-        fetch("http://localhost:5000/batch")
-        .then(res => {
-            if(!res.ok){
-                throw Error("Could not fetch the data for that resource!")
-            }
-            return res.json();
-        })
-        .then(data => {
-            setBatch(data);
-            setIsLoading(false);
-        })
-        .catch(err => {
-            setIsLoading(false);
-            setError(err.message);
-            
+        database.ref('recipes/' ).get().then((snapshot) => {
+            const data = firebaseLooperTwo(snapshot)
+            console.log(data)
+            setBatch(data)           
         })
     }, [])
     return (
