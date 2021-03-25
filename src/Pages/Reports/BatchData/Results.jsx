@@ -28,6 +28,7 @@ import { database } from '../../../firebaseGlass';
 import { firebaseLooperTwo } from '../../../utils/tools';
 import { Alert, AlertTitle } from '@material-ui/lab';
 import TestHome from '../../Tests/TestHome';
+import TestData from '../../Tests/TestData';
 
 const useStyles = makeStyles((theme) => ({
   root: {},
@@ -227,7 +228,7 @@ const Results = ({values, className, customers, ...rest }) => {
       
                    </Alert>
                    <Box mt={3} minWidth={500}>
-                     <TestHome data={values.arrayList}/>
+                     <TestData data={values.arrayList}/>
                    </Box>
                       
                    
