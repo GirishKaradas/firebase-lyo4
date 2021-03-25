@@ -1,8 +1,9 @@
 # Changes till 25/03/2021
  1. Complete Call logs and batch logs data from glass 
  2. Graph without keep time 
- 3. Account --> Create new pass / email within the application
- 4. Video call href pending
+ 3. Custom 404 added
+ 4. Account --> Create new pass / email within the application
+ 5. Video call href pending
 
 # Changes till 23/3/2021
  1. Call logs data from Glass
