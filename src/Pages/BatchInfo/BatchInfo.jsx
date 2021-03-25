@@ -86,7 +86,7 @@ const BatchInfo = ({match}) => {
 
                   <img
                   height="200px"
-                  width="150px"
+                  width="300px"
                        src={customer.url}
                       />
                        
