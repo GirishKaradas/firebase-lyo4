@@ -27,6 +27,7 @@ import Page from "./components/Page";
 import Tests from "./Pages/Tests/Tests";
 import AccountDetails from "./components/Account/AccountDetails";
 import NotFoundView from "./Pages/Error/NotFoundView";
+import BatchInfo from "./Pages/BatchInfo/BatchInfo";
 
 function App() {
   return (
@@ -39,7 +40,7 @@ function App() {
       <Switch>
         <AppRoute path='/machine-data/:id/Reports' exact component={Reports} layout={MainLayout}/>
          <AppRoute path='/call-logs' exact component={CustomerListView} layout={MainLayout} />
-        <AppRoute path='/machine-data/reports/:id/Batch-Logs' exact component={BatchListView} layout={MainLayout} />
+        <AppRoute path='/machine-data/reports/:id/Recipes' exact component={BatchListView} layout={MainLayout} />
         <AppRoute path='/machine-data/reports/:id/process' exact component={Process} layout={MainLayout} />
         <AppRoute path='/machine-data/:id/Content' exact component={ContentsData} layout={MainLayout} />
         <AppRoute path="/machine-data/:id/Content/add-content" exact component={AddContent} layout={MainLayout}/>
@@ -54,6 +55,7 @@ function App() {
         <AppRoute path="/" exact component={MiddlePage} layout={MainLayout}/>
         <AppRoute path="/users" exact component={Users} layout={MainLayout}/>
         <AppRoute path="/test" exact component={Tests} layout={MainLayout}/>
+        <AppRoute path="/machine-data/Batch/:id/Batch" exact component={BatchInfo} layout={MainLayout}/>
         <Route exact component={NotFoundView}/>
       </Switch>
     </Router>

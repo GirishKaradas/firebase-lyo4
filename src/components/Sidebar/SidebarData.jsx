@@ -18,13 +18,18 @@ export const SidebarData = [
        
     },
     {
-        title: 'Batch-Logs',
+        title: 'Recipes',
         path: '/machine-data/Reports',
         icon: <BuildIcon style={{color: "white"}}/>
     },
     {
         title: 'Process',
         path: '/machine-data/Reports',
+        icon: <PieChartIcon style={{color: "white"}}/>
+    },
+     {
+        title: 'Batch',
+        path: '/machine-data/Batch',
         icon: <PieChartIcon style={{color: "white"}}/>
     }
 
