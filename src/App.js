@@ -26,6 +26,7 @@ import ContentsData from "./Pages/ContentsData/ContentsData";
 import Page from "./components/Page";
 import Tests from "./Pages/Tests/Tests";
 import AccountDetails from "./components/Account/AccountDetails";
+import NotFoundView from "./Pages/Error/NotFoundView";
 
 function App() {
   return (
@@ -53,6 +54,7 @@ function App() {
         <AppRoute path="/" exact component={MiddlePage} layout={MainLayout}/>
         <AppRoute path="/users" exact component={Users} layout={MainLayout}/>
         <AppRoute path="/test" exact component={Tests} layout={MainLayout}/>
+        <Route exact component={NotFoundView}/>
       </Switch>
     </Router>
     </BrowserRouter>
