@@ -104,7 +104,7 @@ export default class VideoCall extends React.Component {
             
             <div style={{display: "flex", flexDirection: "column"}}>
                 <OTPublisher
-                properties={{ publishVideo, width: 300, height: 400, }}
+                properties={{ publishVideo, width: 400, height: 300, }}
                 onPublish={this.onPublish}
                 onError={this.onPublishError}
                 eventHandlers={this.publisherEventHandlers}
@@ -122,7 +122,7 @@ export default class VideoCall extends React.Component {
           <OTStreams>
               
             <OTSubscriber
-              properties={{ width: 300, height: 400 }}
+              properties={{ width: 400, height: 300 }}
               onSubscribe={this.onSubscribe}
               onError={this.onSubscribeError}
               eventHandlers={this.subscriberEventHandlers}
