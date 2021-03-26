@@ -28,6 +28,7 @@ import Tests from "./Pages/Tests/Tests";
 import AccountDetails from "./components/Account/AccountDetails";
 import NotFoundView from "./Pages/Error/NotFoundView";
 import BatchInfo from "./Pages/BatchInfo/BatchInfo";
+import RenderVc from "./components/VideoCall/RenderVc";
 
 function App() {
   return (
@@ -56,6 +57,7 @@ function App() {
         <AppRoute path="/users" exact component={Users} layout={MainLayout}/>
         <AppRoute path="/test" exact component={Tests} layout={MainLayout}/>
         <AppRoute path="/machine-data/Batch/:id/Batch" exact component={BatchInfo} layout={MainLayout}/>
+        <Route path="/videocall" exact component={RenderVc}/>
         <Route exact component={NotFoundView}/>
       </Switch>
     </Router>

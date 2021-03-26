@@ -10,6 +10,7 @@ import GroupIcon from '@material-ui/icons/Group';
 import BuildIcon from '@material-ui/icons/Build';
 import PhoneCallbackIcon from '@material-ui/icons/PhoneCallback';
 import { AlertTitle } from '@material-ui/lab'
+import VideoCallIcon from '@material-ui/icons/VideoCall';
 import Machines from '../../components/Machines/Machines'
 const MiddlePage = () => {
 
@@ -51,10 +52,11 @@ const MiddlePage = () => {
       
               <Grid > <br/>  </Grid>
           
-             <Button startIcon={<BuildIcon/>} style={{backgroundColor: "blue",width:"150px", marginRight: "30px"}} color="primary" variant="contained" href="/machine-data"> Machines</Button>
-            <Button startIcon={<PersonIcon/>} style={{backgroundColor: "blue",width:"150px",marginRight: "30px"}} color="primary" variant="contained" href="/account"> Account</Button>
-            <Button startIcon={<GroupIcon/>} style={{backgroundColor: "blue",width:"150px",marginRight: "30px"}} color="primary" variant="contained" href="/users"> Users</Button>
-             <Button startIcon={<PhoneCallbackIcon/>} style={{backgroundColor: "blue",width:"150px",marginRight: "30px"}} color="primary" variant="contained" href="/call-logs"> Call Logs</Button>
+             <Button startIcon={<BuildIcon/>} style={{backgroundColor: "blue",width:"150px", marginRight: "30px", marginTop: "3%"}} color="primary" variant="contained" href="/machine-data"> Machines</Button>
+            <Button startIcon={<PersonIcon/>} style={{backgroundColor: "blue",width:"150px",marginRight: "30px", marginTop: "3%"}} color="primary" variant="contained" href="/account"> Account</Button>
+            <Button startIcon={<GroupIcon/>} style={{backgroundColor: "blue",width:"150px",marginRight: "30px", marginTop: "3%"}} color="primary" variant="contained" href="/users"> Users</Button>
+             <Button startIcon={<PhoneCallbackIcon/>} style={{backgroundColor: "blue",width:"150px",marginRight: "30px", marginTop: "3%"}} color="primary" variant="contained" href="/call-logs"> Call Logs</Button>
+              <Button startIcon={<VideoCallIcon/>} style={{backgroundColor: "blue",width:"150px",marginRight: "30px", marginTop: "3%"}} color="primary" variant="contained" href="/videocall"> Video Call</Button>
             {error && <Alert severity="error">{error}</Alert>}
             <br/>
             <br/>
