@@ -1,3 +1,8 @@
+# Changes 26/03/2021
+ 1. Video call Feature implemented
+ 2. Video call design changed 
+ 3. Testing of Video call and Components from 25/03/2021 have been completed 
+
 # Changes till 25/03/2021
  1. Complete Call logs and Recipee data from glass 
  2. Graph without keep time 
